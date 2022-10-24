@@ -11,7 +11,7 @@ namespace DemoJWT.Service
             {
                 "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
             };
-            var forecast = Enumerable.Range(1, 5).Select(index =>
+            var forecast = Enumerable.Range(1, 10).Select(index =>
               new WeatherForecast
               (
                   DateTime.Now.AddDays(index),

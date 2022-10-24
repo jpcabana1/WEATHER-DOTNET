@@ -90,11 +90,12 @@ app.UseExceptionHandler(options =>
 
 
 app.UseHttpsRedirection();
-// app.UseCors(conf => 
-//     conf.AllowAnyHeader()
-//         .AllowAnyMethod()
-//         .WithOrigins("http://localhost:3000")
-// );
+app.UseCors(conf =>
+    conf.WithOrigins("http://localhost:3000")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials()
+);
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
