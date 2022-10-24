@@ -1,3 +1,4 @@
+using System.Collections;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,28 +8,20 @@ namespace WEATHER_DOTNET.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IWeatherForecastService _forecastService;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastService forecastService)
     {
         _logger = logger;
+        _forecastService = forecastService;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
     [Authorize]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpGet(Name = "GetWeatherForecast")]
+    public IEnumerable Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateTime.Now.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        return _forecastService.GetWeatherForecast();
     }
 }
