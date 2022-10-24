@@ -8,7 +8,6 @@ namespace WEATHER_DOTNET.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-
     private readonly ILogger<WeatherForecastController> _logger;
     private readonly IWeatherForecastService _forecastService;
 
